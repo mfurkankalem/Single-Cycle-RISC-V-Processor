@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.126 (w)1999-2026 BSI
-[*] Sun Jul 19 16:28:09 2026
+[*] Sun Jul 19 18:02:55 2026
 [*]
-[dumpfile] "/home/mfurk/Belgeler/RISC-V/SystemVerilog/processor_single_cycle/cmake_psc/build/dump.vcd"
-[dumpfile_mtime] "Sun Jul 19 16:26:58 2026"
-[dumpfile_size] 5051
+[dumpfile] "/home/mfurk/Belgeler/RISC-V/SystemVerilog/processor_single_cycle/dump.vcd"
+[dumpfile_mtime] "Sun Jul 19 18:00:57 2026"
+[dumpfile_size] 7720
 [savefile] "/home/mfurk/Belgeler/RISC-V/SystemVerilog/processor_single_cycle/dump_build.gtkw"
 [timestart] 1
-[size] 1137 699
+[size] 1226 699
 [pos] -1 -1
-*-2.852156 2 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-2.852156 4 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] TOP.
 [treeopen] TOP.top.
 [sst_width] 209
@@ -77,14 +77,12 @@ TOP.top.r_a3[4:0]
 (4)TOP.top.r_a3[4:0]
 @1401200
 -group_end
+@28
+TOP.top.r_cd
 @22
 TOP.top.r_rd1[31:0]
 TOP.top.r_rd2[31:0]
 TOP.top.r_wd3[31:0]
-@28
-[color] 1
-TOP.top.r_we3
-@22
 [color] 1
 TOP.top.r_0.register[0][31:0]
 [color] 1
@@ -103,10 +101,10 @@ TOP.top.r_0.register[6][31:0]
 TOP.top.r_0.register[7][31:0]
 [color] 1
 TOP.top.r_0.register[8][31:0]
-@c00023
+@c00022
 [color] 5
 TOP.top.e_a[24:0]
-@29
+@28
 (0)TOP.top.e_a[24:0]
 (1)TOP.top.e_a[24:0]
 (2)TOP.top.e_a[24:0]
@@ -132,17 +130,17 @@ TOP.top.e_a[24:0]
 (22)TOP.top.e_a[24:0]
 (23)TOP.top.e_a[24:0]
 (24)TOP.top.e_a[24:0]
-@1401201
+@1401200
 -group_end
-@29
+@28
 [color] 5
 TOP.top.e_cd[1:0]
-@23
+@22
 [color] 5
 TOP.top.e_rd[31:0]
-@28
+@29
 [color] 2
-TOP.top.m_data.dm_we
+TOP.top.dm_cd
 @22
 [color] 2
 TOP.top.m_data.dm_a[31:0]

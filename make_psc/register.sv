@@ -19,7 +19,7 @@ assign r_rd2 = register[r_a2];
   
     if(r_cd==1) begin
       register[r_a3] = r_wd3;
-      register[r_a1] = register[r_a1]+1; //fake
+      //register[r_a1] = register[r_a1]+1; //fake
     end
 
   end
