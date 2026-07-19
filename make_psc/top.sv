@@ -46,6 +46,7 @@ logic [2:0] alu_cd;
 logic [31:0] dm_a, dm_rd, dm_wd;
 logic [31:0] im_rd;
 
+prog_cnt pc_0(.clk(clk), .program_counter(program_counter));
 
 register r_0(.clk(clk), .r_cd(r_cd), .r_a1(r_a1), .r_a2(r_a2), .r_a3(r_a3),
  .r_wd3(r_wd3), .r_rd1(r_rd1), .r_rd2(r_rd2));
@@ -78,9 +79,7 @@ demux demux_1 (.a1(r_rd2), .d_cd(d_cd1), .rd1(demux1_out1), .rd2(dm_wd));
 demux demux_2 (.a1(alu_rd), .d_cd(d_cd2), .rd1(dm_a), .rd2(demux2_out2));
 
 
-  always_ff @(posedge clk) begin 
-    program_counter = program_counter + 1;                       
-  end
+
 
 
   final begin
