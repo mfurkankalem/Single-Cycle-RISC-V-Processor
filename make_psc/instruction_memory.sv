@@ -5,11 +5,15 @@ module instruction_memory (
     output logic [31:0] im_rd 
 );
 
-logic [31:0] inst [0:7];                  //fake sonra 128
-//fake ayrıca komut yükleme sistemi olcak
+logic [31:0] inst [0:15];                  //fake sonra 128
 
-//assign im_rd = inst[im_a]; normali bu düzelticem
-assign im_rd = im_a;
+//fake
+assign inst[0] = 32'b0000000_01001_00011_000_00101_0000000;  
+assign inst[1] = 32'b0000000_01010_00011_000_00101_0000000;
+assign inst[2] = 32'b0000000_01011_00011_000_00101_0000000;
+//fake
+
+assign im_rd = inst[im_a]; 
 
 
 endmodule

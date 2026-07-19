@@ -2,7 +2,7 @@
 [*] GTKWave Analyzer v3.3.126 (w)1999-2026 BSI
 [*] Sun Jul 19 18:02:55 2026
 [*]
-[dumpfile] "/home/mfurk/Belgeler/RISC-V/SystemVerilog/processor_single_cycle/dump.vcd"
+[dumpfile] "/home/mfurk/Belgeler/RISC-V/SystemVerilog/processor_single_cycle/make_psc/dump.vcd"
 [dumpfile_mtime] "Sun Jul 19 18:00:57 2026"
 [dumpfile_size] 7720
 [savefile] "/home/mfurk/Belgeler/RISC-V/SystemVerilog/processor_single_cycle/dump_build.gtkw"

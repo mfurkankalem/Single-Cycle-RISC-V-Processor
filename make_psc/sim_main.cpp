@@ -12,10 +12,10 @@ int main(int argc, char** argv) {
     Vtop* const top = new Vtop{contextp};
     VerilatedVcdC* tfp = new VerilatedVcdC;
     top->trace(tfp, 99);
-    tfp->open("dump.vcd");
-
+    const char* vcd_name = (argc > 1) ? argv[1] : "dump.vcd";
+    tfp->open(vcd_name);
     
-    while (!contextp->gotFinish() && contextp->time() < 20) {
+    while (!contextp->gotFinish() && contextp->time() < 10) {
         contextp->timeInc(1);
         top->clk = !top->clk;
         top->eval();

@@ -2,5 +2,6 @@
 *.log
 *.csrc
 *.vcd
+*.gtkw
 obj_*
 logs

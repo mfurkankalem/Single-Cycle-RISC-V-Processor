@@ -1,7 +1,6 @@
 
 
 module control (
-    input logic clk,                            //fake
     input  logic [6:0] op,
     input  logic [2:0] funct3, 
     input logic [6:0] funct7,
@@ -10,19 +9,15 @@ module control (
     output  logic [2:0] alu_cd 
 );
 
+//fake
 assign e_cd = 2'b01;
 assign alu_cd = 3'b001;
 assign m_cd1 = 1;
 assign d_cd2 = 1;
+assign r_cd = 1;
+assign dm_cd = 1;
+//fake
 
-
-  always_ff @(posedge clk) begin 
-    r_cd = ~r_cd;                       //fake
-  end
-
-  always_ff @(negedge clk) begin
-    dm_cd = ~dm_cd;                       //fake
-  end
 
 
 endmodule

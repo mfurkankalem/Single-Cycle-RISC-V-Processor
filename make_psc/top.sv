@@ -29,6 +29,8 @@ module demux (
 endmodule
 
 module top (input logic clk);
+logic [31:0] program_counter;
+
 logic [4:0] r_a1, r_a2, r_a3;
 logic [31:0] r_rd1, r_rd2, r_wd3;
 
@@ -43,7 +45,6 @@ logic [2:0] alu_cd;
 
 logic [31:0] dm_a, dm_rd, dm_wd;
 logic [31:0] im_rd;
-logic [31:0] im_a= 32'b0000000_01001_00011_000_00101_0000000;   //fake
 
 
 register r_0(.clk(clk), .r_cd(r_cd), .r_a1(r_a1), .r_a2(r_a2), .r_a3(r_a3),
@@ -58,11 +59,9 @@ data_memory m_data(.clk(clk), .dm_cd(dm_cd), .dm_a(dm_a), .dm_wd (dm_wd),
 
 control c_0(.op(im_rd[6:0]), .funct3(im_rd[14:12]), .funct7(im_rd[31:25]),
 .r_cd(r_cd), .dm_cd(dm_cd), .m_cd1(m_cd1), .m_cd2(m_cd2), .d_cd1(d_cd1),
-.d_cd2(d_cd2), .e_cd(e_cd), .alu_cd(alu_cd)
-, .clk(clk)                                             //fake
-);
+.d_cd2(d_cd2), .e_cd(e_cd), .alu_cd(alu_cd));
 
-instruction_memory m_inst(.im_a(im_a), .im_rd(im_rd));   //fake
+instruction_memory m_inst(.im_a(program_counter), .im_rd(im_rd));   
 
 
 assign e_a = im_rd[31:7];
@@ -77,6 +76,12 @@ mux mux_2 (.a1(demux2_out2), .a2(dm_rd), .m_cd(m_cd2), .m_rd(r_wd3));
 logic [31:0] demux1_out1, demux2_out2;
 demux demux_1 (.a1(r_rd2), .d_cd(d_cd1), .rd1(demux1_out1), .rd2(dm_wd));
 demux demux_2 (.a1(alu_rd), .d_cd(d_cd2), .rd1(dm_a), .rd2(demux2_out2));
+
+
+  always_ff @(posedge clk) begin 
+    program_counter = program_counter + 1;                       
+  end
+
 
   final begin
     $display("Simulasyon bitti. Toplam çalışma süresi : %0t", $time);
