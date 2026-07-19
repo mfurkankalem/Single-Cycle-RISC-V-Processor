@@ -8,6 +8,8 @@ module instruction_memory (
 logic [31:0] inst [0:7];                  //fake sonra 128
 //fake ayrıca komut yükleme sistemi olcak
 
-assign im_rd = inst[im_a];
+//assign im_rd = inst[im_a]; normali bu düzelticem
+assign im_rd = im_a;
+
 
 endmodule

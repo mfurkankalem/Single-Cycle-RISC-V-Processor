@@ -1,0 +1,162 @@
+[*]
+[*] GTKWave Analyzer v3.3.126 (w)1999-2026 BSI
+[*] Sun Jul 19 16:28:09 2026
+[*]
+[dumpfile] "/home/mfurk/Belgeler/RISC-V/SystemVerilog/processor_single_cycle/cmake_psc/build/dump.vcd"
+[dumpfile_mtime] "Sun Jul 19 16:26:58 2026"
+[dumpfile_size] 5051
+[savefile] "/home/mfurk/Belgeler/RISC-V/SystemVerilog/processor_single_cycle/dump_build.gtkw"
+[timestart] 1
+[size] 1137 699
+[pos] -1 -1
+*-2.852156 2 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TOP.
+[treeopen] TOP.top.
+[sst_width] 209
+[signals_width] 253
+[sst_expanded] 1
+[sst_vpaned_height] 191
+@28
+TOP.top.clk
+@c00022
+TOP.top.im_rd[31:0]
+@28
+(0)TOP.top.im_rd[31:0]
+(1)TOP.top.im_rd[31:0]
+(2)TOP.top.im_rd[31:0]
+(3)TOP.top.im_rd[31:0]
+(4)TOP.top.im_rd[31:0]
+(5)TOP.top.im_rd[31:0]
+(6)TOP.top.im_rd[31:0]
+(7)TOP.top.im_rd[31:0]
+(8)TOP.top.im_rd[31:0]
+(9)TOP.top.im_rd[31:0]
+(10)TOP.top.im_rd[31:0]
+(11)TOP.top.im_rd[31:0]
+(12)TOP.top.im_rd[31:0]
+(13)TOP.top.im_rd[31:0]
+(14)TOP.top.im_rd[31:0]
+(15)TOP.top.im_rd[31:0]
+(16)TOP.top.im_rd[31:0]
+(17)TOP.top.im_rd[31:0]
+(18)TOP.top.im_rd[31:0]
+(19)TOP.top.im_rd[31:0]
+(20)TOP.top.im_rd[31:0]
+(21)TOP.top.im_rd[31:0]
+(22)TOP.top.im_rd[31:0]
+(23)TOP.top.im_rd[31:0]
+(24)TOP.top.im_rd[31:0]
+(25)TOP.top.im_rd[31:0]
+(26)TOP.top.im_rd[31:0]
+(27)TOP.top.im_rd[31:0]
+(28)TOP.top.im_rd[31:0]
+(29)TOP.top.im_rd[31:0]
+(30)TOP.top.im_rd[31:0]
+(31)TOP.top.im_rd[31:0]
+@1401200
+-group_end
+@c00022
+TOP.top.r_a1[4:0]
+@28
+(0)TOP.top.r_a1[4:0]
+(1)TOP.top.r_a1[4:0]
+(2)TOP.top.r_a1[4:0]
+(3)TOP.top.r_a1[4:0]
+(4)TOP.top.r_a1[4:0]
+@1401200
+-group_end
+@22
+TOP.top.r_a2[4:0]
+@c00022
+TOP.top.r_a3[4:0]
+@28
+(0)TOP.top.r_a3[4:0]
+(1)TOP.top.r_a3[4:0]
+(2)TOP.top.r_a3[4:0]
+(3)TOP.top.r_a3[4:0]
+(4)TOP.top.r_a3[4:0]
+@1401200
+-group_end
+@22
+TOP.top.r_rd1[31:0]
+TOP.top.r_rd2[31:0]
+TOP.top.r_wd3[31:0]
+@28
+[color] 1
+TOP.top.r_we3
+@22
+[color] 1
+TOP.top.r_0.register[0][31:0]
+[color] 1
+TOP.top.r_0.register[1][31:0]
+[color] 1
+TOP.top.r_0.register[2][31:0]
+[color] 1
+TOP.top.r_0.register[3][31:0]
+[color] 1
+TOP.top.r_0.register[4][31:0]
+[color] 1
+TOP.top.r_0.register[5][31:0]
+[color] 1
+TOP.top.r_0.register[6][31:0]
+[color] 1
+TOP.top.r_0.register[7][31:0]
+[color] 1
+TOP.top.r_0.register[8][31:0]
+@c00023
+[color] 5
+TOP.top.e_a[24:0]
+@29
+(0)TOP.top.e_a[24:0]
+(1)TOP.top.e_a[24:0]
+(2)TOP.top.e_a[24:0]
+(3)TOP.top.e_a[24:0]
+(4)TOP.top.e_a[24:0]
+(5)TOP.top.e_a[24:0]
+(6)TOP.top.e_a[24:0]
+(7)TOP.top.e_a[24:0]
+(8)TOP.top.e_a[24:0]
+(9)TOP.top.e_a[24:0]
+(10)TOP.top.e_a[24:0]
+(11)TOP.top.e_a[24:0]
+(12)TOP.top.e_a[24:0]
+(13)TOP.top.e_a[24:0]
+(14)TOP.top.e_a[24:0]
+(15)TOP.top.e_a[24:0]
+(16)TOP.top.e_a[24:0]
+(17)TOP.top.e_a[24:0]
+(18)TOP.top.e_a[24:0]
+(19)TOP.top.e_a[24:0]
+(20)TOP.top.e_a[24:0]
+(21)TOP.top.e_a[24:0]
+(22)TOP.top.e_a[24:0]
+(23)TOP.top.e_a[24:0]
+(24)TOP.top.e_a[24:0]
+@1401201
+-group_end
+@29
+[color] 5
+TOP.top.e_cd[1:0]
+@23
+[color] 5
+TOP.top.e_rd[31:0]
+@28
+[color] 2
+TOP.top.m_data.dm_we
+@22
+[color] 2
+TOP.top.m_data.dm_a[31:0]
+[color] 2
+TOP.top.m_data.dm_rd[31:0]
+[color] 2
+TOP.top.m_data.dm_wd[31:0]
+[color] 2
+TOP.top.m_data.data[0][31:0]
+[color] 2
+TOP.top.m_data.data[1][31:0]
+[color] 2
+TOP.top.m_data.data[2][31:0]
+[color] 2
+TOP.top.m_data.data[3][31:0]
+[pattern_trace] 1
+[pattern_trace] 0
