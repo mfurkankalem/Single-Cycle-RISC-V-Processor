@@ -1,5 +1,3 @@
-# Single-Cycle RISC-V Processor
-
 A single-cycle RISC-V processor capable of simple addition, subtraction, store-to-memory, and load-from-memory operations. The design is written in SystemVerilog and simulated with [Verilator](https://www.veripool.org/verilator/) + CMake. The project also includes a Python assembler that translates programs written with custom Turkish instruction names into machine code (hex).
 
 ## Features
