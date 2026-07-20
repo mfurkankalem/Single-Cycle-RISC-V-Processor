@@ -12,10 +12,9 @@ int main(int argc, char** argv) {
     Vtop* const top = new Vtop{contextp};
     VerilatedVcdC* tfp = new VerilatedVcdC;
     top->trace(tfp, 99);
-    const char* vcd_name = (argc > 1) ? argv[1] : "dump.vcd";
-    tfp->open(vcd_name);
+    tfp->open("/home/mfurk/Belgeler/RISC-V/SystemVerilog/processor_single_cycle/dump.vcd");
     
-    while (!contextp->gotFinish() && contextp->time() < 10) {
+    while (!contextp->gotFinish() && contextp->time() < 16) {
         contextp->timeInc(1);
         top->clk = !top->clk;
         top->eval();

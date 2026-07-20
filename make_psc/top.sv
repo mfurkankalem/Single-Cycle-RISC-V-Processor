@@ -42,7 +42,6 @@ logic r_cd, dm_cd, m_cd1, m_cd2, d_cd1, d_cd2;
 logic [1:0] e_cd;
 logic [2:0] alu_cd;
 
-
 logic [31:0] dm_a, dm_rd, dm_wd;
 logic [31:0] im_rd;
 
@@ -77,9 +76,6 @@ mux mux_2 (.a1(demux2_out2), .a2(dm_rd), .m_cd(m_cd2), .m_rd(r_wd3));
 logic [31:0] demux1_out1, demux2_out2;
 demux demux_1 (.a1(r_rd2), .d_cd(d_cd1), .rd1(demux1_out1), .rd2(dm_wd));
 demux demux_2 (.a1(alu_rd), .d_cd(d_cd2), .rd1(dm_a), .rd2(demux2_out2));
-
-
-
 
 
   final begin

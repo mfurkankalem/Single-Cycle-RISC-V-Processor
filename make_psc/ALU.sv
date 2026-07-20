@@ -7,8 +7,14 @@ module ALU (
 );
 
   always_comb begin
-    if(alu_cd==3'b001)
+    if (alu_cd==3'b001)
       alu_rd = alu_a | alu_b;
+    else if (alu_cd==3'b010)
+      alu_rd = alu_a;
+    else if (alu_cd==3'b011)
+      alu_rd = alu_b;
+    else if (alu_cd==3'b100)
+      alu_rd = alu_a + alu_b;
     else
       alu_rd = 0;
 

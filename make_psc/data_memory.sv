@@ -11,7 +11,7 @@ logic [31:0] data [0:7];                  //fake sonra 128
 
 assign dm_rd = data[dm_a];
 
-  always @(posedge clk) begin
+  always @(negedge clk) begin
   
     if(dm_cd==1) begin
       data[dm_a] = dm_wd;

@@ -17,6 +17,8 @@ module extender (
     else if (e_cd==2'b11) begin             // U-type operations
       e_rd = {e_a[24:5], 12'b0};
     end
+    else
+      e_rd = 0;
 
   end
 endmodule
