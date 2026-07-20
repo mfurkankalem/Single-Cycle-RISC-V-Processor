@@ -79,8 +79,8 @@ def main():
             elif ((cmd == "add") or (cmd == "ekle")): bin_code = assemble_add(args)
             elif ((cmd == "subi") or (cmd == "çıkarh")): bin_code = assemble_subi(args)
             elif ((cmd == "sub") or (cmd == "çıkar")): bin_code = assemble_sub(args)
-            elif ((cmd == "sw") or (cmd == "yaz")): bin_code = assemble_sw(args)
-            elif ((cmd == "lw") or (cmd == "kaydet")): bin_code = assemble_lw(args)
+            elif ((cmd == "sw") or (cmd == "kaydet")): bin_code = assemble_sw(args)
+            elif ((cmd == "lw") or (cmd == "oku")): bin_code = assemble_lw(args)
             else:
                 print(f"Bilinmeyen komut: {cmd}")
                 continue

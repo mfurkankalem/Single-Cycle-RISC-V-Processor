@@ -3,6 +3,6 @@ ekleh x0 x0 35,
 ekleh x1 x0 3,
 ekle x2 x1 x0,
 ekleh x3 x3 1,
-yaz x2 1(x3),
-kaydet x4 1(x3),
+kaydet x2 1(x3),
+oku x4 1(x3),
 çıkar x5 x4 x0
