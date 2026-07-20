@@ -36,10 +36,10 @@ add_executable(example ../make_psc/sim_main.cpp)
 target_compile_features(example PUBLIC cxx_std_14)
 add_custom_command(
     OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/../make_psc/instructions.txt
-    COMMAND python3 assembler.py
+    COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/../make_psc/assembler.py
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../make_psc
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/../make_psc/codes.txt
-    COMMENT "codes.txt degisti, assembler yeniden calisiyor"
+    COMMENT "codes.txt changed, running assembler.py to generate instructions.txt"
 )
 add_custom_target(run_assembler
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/../make_psc/instructions.txt
@@ -53,3 +53,9 @@ verilate(example TRACE_VCD
   VERILATOR_ARGS --timing
 )
 add_dependencies(example run_assembler)
+
+add_custom_target(run
+    COMMAND example
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../make_psc
+    DEPENDS example
+)

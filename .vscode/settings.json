@@ -1,4 +1,6 @@
 {
-    "cmake.sourceDirectory": "/home/mfurk/Belgeler/RISC-V/SystemVerilog/processor_single_cycle/cmake_psc"
-    
+    "cmake.sourceDirectory": "${workspaceFolder}/cmake_psc",
+    "cmake.debugConfig": {
+        "cwd": "${workspaceFolder}/make_psc"
+    }
 }

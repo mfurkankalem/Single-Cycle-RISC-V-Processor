@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
     Vtop* const top = new Vtop{contextp};
     VerilatedVcdC* tfp = new VerilatedVcdC;
     top->trace(tfp, 99);
-    tfp->open("/home/mfurk/Belgeler/RISC-V/SystemVerilog/processor_single_cycle/dump.vcd");
+    tfp->open("dump.vcd");
     
     while (!contextp->gotFinish() && contextp->time() < 30) {
         contextp->timeInc(1);

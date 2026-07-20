@@ -1,8 +1,9 @@
 # assembler.py
 import sys
+import os
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def parse_mem_arg(arg):
-    # "1(x3)" gibi bir girdiyi parçalar -> imm: 1, reg: 3
     imm_str, reg_str = arg.split('(')
     imm = int(imm_str)
     reg = int(reg_str.replace('x', '').replace(')', ''))
@@ -29,7 +30,7 @@ def assemble_add(args):
 def assemble_subi(args):
     rd = int(args[0].replace('x', ''))
     rs1 = int(args[1].replace('x', ''))
-    imm = -int(args[2])   # addi'den tek fark: imm negatifleniyor
+    imm = -int(args[2])   
     if imm < 0: imm = (1 << 12) + imm
     opcode = "0010011"
     funct3 = "000"
@@ -41,7 +42,7 @@ def assemble_sub(args):
     rs2 = int(args[2].replace('x', ''))
     opcode = "0110011"
     funct3 = "000"
-    funct7 = "0100000"   # add'de 0000000, sub'da bit farklı
+    funct7 = "0100000"   
     return f"{funct7}{format(rs2, '05b')}{format(rs1, '05b')}{funct3}{format(rd, '05b')}{opcode}"
 
 def assemble_sw(args):
@@ -64,13 +65,11 @@ def assemble_lw(args):
     return f"{format(imm, '012b')}{format(rs1, '05b')}{funct3}{format(rd, '05b')}{opcode}"
 
 def main():
-    # Burada add, sw ve lw komutların da listede mevcut
-    with open("codes.txt") as cf:
+    with open(os.path.join(SCRIPT_DIR, "codes.txt")) as cf:
         lines = [l.strip() for l in cf if l.strip()]
     
-    with open("instructions.txt", "w") as f:
+    with open(os.path.join(SCRIPT_DIR, "instructions.txt"), "w") as f:
         for line in lines:
-            # Virgülleri temizleyip boşluklara göre ayırıyoruz
             parts = line.replace(',', '').split()
             cmd = parts[0]
             args = parts[1:]
@@ -85,9 +84,8 @@ def main():
                 print(f"Bilinmeyen komut: {cmd}")
                 continue
                 
-            # Binary string'i tam sayıya çevir (base 2), sonra 8 haneli büyük harfli Hex'e dönüştür
+        
             hex_code = format(int(bin_code, 2), '08X') 
-            
             f.write(hex_code + "\n")
             print(f"{line.ljust(20)} -> 0x{hex_code}")
 
