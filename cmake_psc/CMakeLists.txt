@@ -34,6 +34,17 @@ endif()
 # Create a new executable target that will contain all your sources
 add_executable(example ../make_psc/sim_main.cpp)
 target_compile_features(example PUBLIC cxx_std_14)
+add_custom_command(
+    OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/../make_psc/instructions.txt
+    COMMAND python3 assembler.py
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../make_psc
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/../make_psc/codes.txt
+    COMMENT "codes.txt degisti, assembler yeniden calisiyor"
+)
+add_custom_target(run_assembler
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/../make_psc/instructions.txt
+)
+file(COPY "../make_psc/instructions.txt" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 # Add the Verilated circuit to the target
 verilate(example TRACE_VCD
@@ -41,3 +52,4 @@ verilate(example TRACE_VCD
   SOURCES ../make_psc/top.sv
   VERILATOR_ARGS --timing
 )
+add_dependencies(example run_assembler)

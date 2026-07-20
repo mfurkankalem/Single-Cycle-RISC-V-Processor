@@ -15,6 +15,8 @@ module ALU (
       alu_rd = alu_b;
     else if (alu_cd==3'b100)
       alu_rd = alu_a + alu_b;
+    else if (alu_cd==3'b101)
+      alu_rd = alu_a - alu_b;
     else
       alu_rd = 0;
 

@@ -80,8 +80,8 @@ demux demux_2 (.a1(alu_rd), .d_cd(d_cd2), .rd1(dm_a), .rd2(demux2_out2));
 
   final begin
     $display("Simulasyon bitti. Toplam çalışma süresi : %0t", $time);
-    $display("Register 1 output : %0h", r_rd1);
-    $display("Register 2 output : %0h", r_rd2);
+    $display("Register 1 son output : %0h", r_rd1);
+    $display("Register 2 son output : %0h", r_rd2);
   end
 
 endmodule

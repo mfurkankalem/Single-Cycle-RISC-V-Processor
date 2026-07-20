@@ -14,7 +14,7 @@ int main(int argc, char** argv) {
     top->trace(tfp, 99);
     tfp->open("/home/mfurk/Belgeler/RISC-V/SystemVerilog/processor_single_cycle/dump.vcd");
     
-    while (!contextp->gotFinish() && contextp->time() < 16) {
+    while (!contextp->gotFinish() && contextp->time() < 30) {
         contextp->timeInc(1);
         top->clk = !top->clk;
         top->eval();

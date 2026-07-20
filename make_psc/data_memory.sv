@@ -7,7 +7,7 @@ module data_memory (
     output logic [31:0] dm_rd 
 );
 
-logic [31:0] data [0:7];                  //fake sonra 128
+logic [31:0] data [0:31];                 
 
 assign dm_rd = data[dm_a];
 

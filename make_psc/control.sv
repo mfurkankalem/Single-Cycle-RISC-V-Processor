@@ -30,6 +30,16 @@ module control (
         d_cd2 = 1;
         dm_cd = 0;
     end
+    else if (op==7'd51 & funct3==0 & funct7==7'b0100000) begin //sub
+        r_cd = 1;
+        e_cd = 2'b00;
+        alu_cd = 3'b101;   
+        m_cd1 = 0;
+        m_cd2 = 0;
+        d_cd1 = 0;
+        d_cd2 = 1;
+        dm_cd = 0;
+    end
     else if (op==7'd35 & funct3==3'b010) begin //sw
         r_cd = 0;
         e_cd = 2'b10;
