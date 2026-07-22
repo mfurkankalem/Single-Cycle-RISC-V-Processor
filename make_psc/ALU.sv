@@ -6,19 +6,23 @@ module ALU (
     output logic [31:0] alu_rd
 );
 
-  always_comb begin
-    if (alu_cd==3'b000)
-      alu_rd = alu_a + alu_b;
-    else if (alu_cd==3'b001)
-      alu_rd = alu_a - alu_b;
-    else if (alu_cd==3'b010)
-      alu_rd = alu_a & alu_b;
-    else if (alu_cd==3'b011)
-      alu_rd = alu_a | alu_b;
-    else
-      alu_rd = 0;
+  typedef enum logic [2:0] {
+        ALU_ADD = 3'b000,
+        ALU_SUB = 3'b001,
+        ALU_AND = 3'b010,
+        ALU_OR  = 3'b011
+    } alu_op_e;
 
-  end
+    always_comb begin
+        case (alu_cd)
+            ALU_ADD: alu_rd = alu_a + alu_b;
+            ALU_SUB: alu_rd = alu_a - alu_b;
+            ALU_AND: alu_rd = alu_a & alu_b;
+            ALU_OR:  alu_rd = alu_a | alu_b;
+            default: alu_rd = '0;
+        endcase
+    end
+
 endmodule
 
 

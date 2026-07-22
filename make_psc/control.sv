@@ -8,41 +8,43 @@ module control (
     output  logic [1:0] e_cd,
     output  logic [2:0] alu_cd 
 );
+logic [16:0] casecode;
+assign casecode = {op, funct3, funct7};
 
     localparam logic [16:0]
         // R-type
         P_ADD   = 17'b0110011_000_0000000,
         P_SUB   = 17'b0110011_000_0100000,
+        P_OR    = 17'b0110011_110_0000000,
+        P_AND   = 17'b0110011_111_0000000,
+        P_XOR   = 17'b0110011_100_0000000,
         P_SLL   = 17'b0110011_001_0000000,
         P_SLT   = 17'b0110011_010_0000000,
         P_SLTU  = 17'b0110011_011_0000000,
-        P_XOR   = 17'b0110011_100_0000000,
         P_SRL   = 17'b0110011_101_0000000,
         P_SRA   = 17'b0110011_101_0100000,
-        P_OR    = 17'b0110011_110_0000000,
-        P_AND   = 17'b0110011_111_0000000,
 
         // I-type 
         P_ADDI  = 17'b0010011_000_???????,
-        P_SLTI  = 17'b0010011_010_???????,
-        P_SLTIU = 17'b0010011_011_???????,
-        P_XORI  = 17'b0010011_100_???????,
         P_ORI   = 17'b0010011_110_???????,
         P_ANDI  = 17'b0010011_111_???????,
+        P_XORI  = 17'b0010011_100_???????,
+        P_SLTI  = 17'b0010011_010_???????,
+        P_SLTIU = 17'b0010011_011_???????,
         P_SLLI  = 17'b0010011_001_0000000,
         P_SRLI  = 17'b0010011_101_0000000,
         P_SRAI  = 17'b0010011_101_0100000,
 
         // Load
-        P_LB    = 17'b0000011_000_???????,
-        P_LH    = 17'b0000011_001_???????,
+        P_LB    = 17'b0000011_000_???????,     //cache
+        P_LH    = 17'b0000011_001_???????,     //cache
         P_LW    = 17'b0000011_010_???????,
-        P_LBU   = 17'b0000011_100_???????,
-        P_LHU   = 17'b0000011_101_???????,
+        P_LBU   = 17'b0000011_100_???????,     //cache
+        P_LHU   = 17'b0000011_101_???????,     //cache
 
         // Store
-        P_SB    = 17'b0100011_000_???????,
-        P_SH    = 17'b0100011_001_???????,
+        P_SB    = 17'b0100011_000_???????,     //cache
+        P_SH    = 17'b0100011_001_???????,     //cache
         P_SW    = 17'b0100011_010_???????,
 
         // Branch
@@ -65,26 +67,19 @@ module control (
         P_FENCE = 17'b0001111_000_???????,
         P_SYS   = 17'b1110011_000_0000000;  
 
-    typedef enum logic [5:0] {
-        OP_ADD, OP_SUB, OP_SLL, OP_SLT, OP_SLTU, OP_XOR, OP_SRL, OP_SRA, OP_OR, OP_AND,
-        OP_ADDI, OP_SLTI, OP_SLTIU, OP_XORI, OP_ORI, OP_ANDI, OP_SLLI, OP_SRLI, OP_SRAI,
-        OP_LB, OP_LH, OP_LW, OP_LBU, OP_LHU,
-        OP_SB, OP_SH, OP_SW,
-        OP_BEQ, OP_BNE, OP_BLT, OP_BGE, OP_BLTU, OP_BGEU,
-        OP_JALR, OP_JAL, OP_LUI, OP_AUIPC,
-        OP_FENCE, OP_ECALL, OP_EBREAK,
-        OP_INVALID
-    } command_e;
-
-    logic [16:0] casecode;
-    assign casecode = {op, funct3, funct7};
+  typedef enum logic [2:0] {
+        ALU_ADD = 3'b000,
+        ALU_SUB = 3'b001,
+        ALU_AND = 3'b010,
+        ALU_OR  = 3'b011
+    } alu_op_e;
 
     always_comb begin
         casez (casecode)
             P_ADD: begin
                 r_cd   = 1'b1;
                 e_cd   = 2'b00;
-                alu_cd = 3'b000;
+                alu_cd = ALU_ADD;
                 m_cd1  = 1'b0;
                 m_cd2  = 1'b0;
                 d_cd1  = 1'b0;

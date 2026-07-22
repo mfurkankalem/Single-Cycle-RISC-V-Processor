@@ -35,16 +35,16 @@ endif()
 add_executable(example ../make_psc/sim_main.cpp)
 target_compile_features(example PUBLIC cxx_std_14)
 add_custom_command(
-    OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/../make_psc/instructions.txt
-    COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/../make_psc/assembler.py
+    OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/../instructions.txt
+    COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/../assembler.py
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../make_psc
-    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/../make_psc/codes.txt
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/../codes.txt
     COMMENT "codes.txt changed, running assembler.py to generate instructions.txt"
 )
 add_custom_target(run_assembler
-    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/../make_psc/instructions.txt
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/../instructions.txt
 )
-file(COPY "../make_psc/instructions.txt" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY "../instructions.txt" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 # Add the Verilated circuit to the target
 verilate(example TRACE_VCD
