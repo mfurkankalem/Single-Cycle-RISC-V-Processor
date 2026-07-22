@@ -4,9 +4,10 @@ module control (
     input  logic [6:0] op,
     input  logic [2:0] funct3, 
     input logic [6:0] funct7,
-    output logic r_cd, dm_cd, m_cd1, m_cd2, d_cd1, d_cd2,
-    output  logic [1:0] e_cd,
-    output  logic [2:0] alu_cd 
+    output logic [1:0] pc_cd, m_cd2, 
+    output logic r_cd, dm_cd, m_cd1, d_cd1, d_cd2,
+    output  logic [2:0] e_cd,
+    output  logic [3:0] alu_cd 
 );
 logic [16:0] casecode;
 assign casecode = {op, funct3, funct7};
@@ -14,11 +15,13 @@ ctrl_e ctrl_bits;
 assign {r_cd, m_cd1, m_cd2, d_cd1, d_cd2, dm_cd} = ctrl_bits;
 
     localparam logic [16:0]
+        P_   = 17'b0111111???????????,          //fake
+        
         // R-type
         P_ADD   = 17'b0110011_000_0000000,
         P_SUB   = 17'b0110011_000_0100000,
-        P_OR    = 17'b0110011_110_0000000,
         P_AND   = 17'b0110011_111_0000000,
+        P_OR    = 17'b0110011_110_0000000,
         P_XOR   = 17'b0110011_100_0000000,
         P_SLL   = 17'b0110011_001_0000000,
         P_SLT   = 17'b0110011_010_0000000,
@@ -68,35 +71,146 @@ assign {r_cd, m_cd1, m_cd2, d_cd1, d_cd2, dm_cd} = ctrl_bits;
         // Misc-mem / system
         P_FENCE = 17'b0001111_000_???????,
         P_SYS   = 17'b1110011_000_0000000;  
+        
 
 
     always_comb begin
         casez (casecode)
+            // R-type
             P_ADD: begin
-                alu_cd = ALU_ADD;
-                e_cd = IMM_NONE;
+                alu_cd    = ALU_ADD;
+                e_cd      = IMM_NONE;
                 ctrl_bits = CTRL_REG_WRITE;
             end
             P_SUB: begin
-                alu_cd = ALU_SUB;
-                e_cd   = IMM_NONE;
+                alu_cd    = ALU_SUB;
+                e_cd      = IMM_NONE;
                 ctrl_bits = CTRL_REG_WRITE;
             end
+            P_AND: begin
+                alu_cd    = ALU_AND;
+                e_cd      = IMM_NONE;
+                ctrl_bits = CTRL_REG_WRITE;
+            end
+            P_OR: begin
+                alu_cd    = ALU_OR;
+                e_cd      = IMM_NONE;
+                ctrl_bits = CTRL_REG_WRITE;
+            end
+            P_XOR: begin
+                alu_cd    = ALU_XOR;
+                e_cd      = IMM_NONE;
+                ctrl_bits = CTRL_REG_WRITE;
+            end
+            P_SLL: begin
+                alu_cd    = ALU_SLL;
+                e_cd      = IMM_NONE;
+                ctrl_bits = CTRL_REG_WRITE;
+            end
+            P_SLT: begin
+                alu_cd    = ALU_SLT;
+                e_cd      = IMM_NONE;
+                ctrl_bits = CTRL_REG_WRITE;
+            end
+            P_SLTU: begin
+                alu_cd    = ALU_SLTU;
+                e_cd      = IMM_NONE;
+                ctrl_bits = CTRL_REG_WRITE;
+            end
+            P_SRL: begin
+                alu_cd    = ALU_SRL;
+                e_cd      = IMM_NONE;
+                ctrl_bits = CTRL_REG_WRITE;
+            end
+            P_SRA: begin
+                alu_cd    = ALU_SRA;
+                e_cd      = IMM_NONE;
+                ctrl_bits = CTRL_REG_WRITE;
+            end
+
+            // I-type 
             P_ADDI: begin
-                alu_cd = ALU_ADD;
-                e_cd   = IMM_I;
+                alu_cd    = ALU_ADD;
+                e_cd      = IMM_I;
                 ctrl_bits = CTRL_REG_WRITE_I;
             end
-            P_SW: begin
-                alu_cd = ALU_ADD;
-                e_cd   = IMM_S;
-                ctrl_bits = CTRL_STORE;
+            P_ORI: begin
+                alu_cd    = ALU_OR;
+                e_cd      = IMM_I;
+                ctrl_bits = CTRL_REG_WRITE_I;
             end
+            P_ANDI: begin
+                alu_cd    = ALU_AND;
+                e_cd      = IMM_I;
+                ctrl_bits = CTRL_REG_WRITE_I;
+            end
+            P_XORI: begin
+                alu_cd    = ALU_XOR;
+                e_cd      = IMM_I;
+                ctrl_bits = CTRL_REG_WRITE_I;
+            end
+            P_SLTI: begin
+                alu_cd    = ALU_SLT;
+                e_cd      = IMM_I;
+                ctrl_bits = CTRL_REG_WRITE_I;
+            end
+            P_SLTIU: begin
+                alu_cd    = ALU_SLTU;
+                e_cd      = IMM_I;
+                ctrl_bits = CTRL_REG_WRITE_I;
+            end
+            P_SLLI: begin
+                alu_cd    = ALU_SLL;
+                e_cd      = IMM_I;
+                ctrl_bits = CTRL_REG_WRITE_I;
+            end
+            P_SRLI: begin
+                alu_cd    = ALU_SRL;
+                e_cd      = IMM_I;
+                ctrl_bits = CTRL_REG_WRITE_I;
+            end
+            P_SRAI: begin
+                alu_cd    = ALU_SRA;
+                e_cd      = IMM_I;
+                ctrl_bits = CTRL_REG_WRITE_I;
+            end
+
+            // Load
             P_LW: begin
                 alu_cd = ALU_ADD;
                 e_cd   = IMM_I;
                 ctrl_bits = CTRL_LOAD;
             end
+                                            //cache
+
+            // Store
+            P_SW: begin
+                alu_cd = ALU_ADD;
+                e_cd   = IMM_S;
+                ctrl_bits = CTRL_STORE;
+            end
+                                            //cache
+            
+            // Branch
+            P_: begin
+                alu_cd    = ALU_NONE;
+                e_cd      = IMM_NONE;
+                ctrl_bits = CTRL_NONE;
+            end
+
+            // Jump
+            P_JAL: begin
+                alu_cd    = ALU_NONE;
+                e_cd      = IMM_J;
+                ctrl_bits = CTRL_JUMP_LINK;
+            end
+            P_: begin
+                alu_cd    = ALU_NONE;
+                e_cd      = IMM_NONE;
+                ctrl_bits = CTRL_NONE;
+            end
+
+            // Default
             default: begin
                 alu_cd = ALU_NONE;
                 e_cd   = IMM_NONE;

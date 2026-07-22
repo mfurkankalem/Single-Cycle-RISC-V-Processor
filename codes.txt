@@ -1,8 +1,11 @@
-ekleh x0 x0 35,
-çıkarh x0 x0 11,
-ekleh x1 x0 3,
-ekle x2 x1 x0,
-ekleh x3 x3 1,
-kaydet x2 1(x3),
-oku x4 1(x3),
-çıkar x5 x4 x0
+ekleh x1 x0 3
+ekleh x2 x0 5
+atlavb x0 2
+ekleh x1 x0 99
+ekleh x2 x0 99
+ekle x3 x1 x2
+ekleh x4 x0 16
+kaydet x3 0(x4)
+oku x5 0(x4)
+atlavb x6 2
+atlavb x0 0
