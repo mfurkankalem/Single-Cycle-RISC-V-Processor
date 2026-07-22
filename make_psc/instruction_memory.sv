@@ -10,7 +10,6 @@ module instruction_memory (
         $readmemh("instructions.txt", inst);
     end
 
-    // Veri çıkışı
     assign im_rd = inst[im_a]; 
 
 endmodule

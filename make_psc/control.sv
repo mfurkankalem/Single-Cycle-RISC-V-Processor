@@ -61,14 +61,14 @@ module control (
         dm_cd = 0;
     end
     else begin
-        r_cd = 0;
-        e_cd = 2'b00;
-        alu_cd = 3'b111;
-        m_cd1 = 1;
-        m_cd2 = 0;
-        d_cd1 = 0;
-        d_cd2 = 1;
-        dm_cd = 0;
+        r_cd = 1'bx;
+        e_cd = 2'bxx;
+        alu_cd = 3'bxxx;
+        m_cd1 = 1'bx;
+        m_cd2 = 1'bx;
+        d_cd1 = 1'bx;
+        d_cd2 = 1'bx;
+        dm_cd = 1'bx;
     end
   end
 
