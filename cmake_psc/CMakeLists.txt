@@ -48,8 +48,11 @@ file(COPY "../instructions.txt" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 # Add the Verilated circuit to the target
 verilate(example TRACE_VCD
+  TOP_MODULE top
+  PREFIX Vtop
   INCLUDE_DIRS "../make_psc"
-  SOURCES ../make_psc/top.sv
+  SOURCES   ../make_psc/riscv_pkg.sv
+            ../make_psc/top.sv
   VERILATOR_ARGS --timing
 )
 add_dependencies(example run_assembler)

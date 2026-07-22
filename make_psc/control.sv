@@ -1,4 +1,4 @@
-
+import riscv_pkg::*;
 
 module control (
     input  logic [6:0] op,
@@ -10,6 +10,8 @@ module control (
 );
 logic [16:0] casecode;
 assign casecode = {op, funct3, funct7};
+ctrl_e ctrl_bits;
+assign {r_cd, m_cd1, m_cd2, d_cd1, d_cd2, dm_cd} = ctrl_bits;
 
     localparam logic [16:0]
         // R-type
@@ -67,74 +69,38 @@ assign casecode = {op, funct3, funct7};
         P_FENCE = 17'b0001111_000_???????,
         P_SYS   = 17'b1110011_000_0000000;  
 
-  typedef enum logic [2:0] {
-        ALU_ADD = 3'b000,
-        ALU_SUB = 3'b001,
-        ALU_AND = 3'b010,
-        ALU_OR  = 3'b011
-    } alu_op_e;
 
     always_comb begin
         casez (casecode)
             P_ADD: begin
-                r_cd   = 1'b1;
-                e_cd   = 2'b00;
                 alu_cd = ALU_ADD;
-                m_cd1  = 1'b0;
-                m_cd2  = 1'b0;
-                d_cd1  = 1'b0;
-                d_cd2  = 1'b1;
-                dm_cd  = 1'b0;
+                e_cd = IMM_NONE;
+                ctrl_bits = CTRL_REG_WRITE;
             end
             P_SUB: begin
-                r_cd   = 1'b1;
-                e_cd   = 2'b00;
-                alu_cd = 3'b001;
-                m_cd1  = 1'b0;
-                m_cd2  = 1'b0;
-                d_cd1  = 1'b0;
-                d_cd2  = 1'b1;
-                dm_cd  = 1'b0;
+                alu_cd = ALU_SUB;
+                e_cd   = IMM_NONE;
+                ctrl_bits = CTRL_REG_WRITE;
             end
             P_ADDI: begin
-                r_cd   = 1'b1;
-                e_cd   = 2'b01;
-                alu_cd = 3'b000;
-                m_cd1  = 1'b1;
-                m_cd2  = 1'b0;
-                d_cd1  = 1'b0;
-                d_cd2  = 1'b1;
-                dm_cd  = 1'b0;
+                alu_cd = ALU_ADD;
+                e_cd   = IMM_I;
+                ctrl_bits = CTRL_REG_WRITE_I;
             end
             P_SW: begin
-                r_cd   = 1'b0;
-                e_cd   = 2'b10;
-                alu_cd = 3'b000;
-                m_cd1  = 1'b1;
-                m_cd2  = 1'b0;
-                d_cd1  = 1'b1;
-                d_cd2  = 1'b0;
-                dm_cd  = 1'b1;
+                alu_cd = ALU_ADD;
+                e_cd   = IMM_S;
+                ctrl_bits = CTRL_STORE;
             end
             P_LW: begin
-                r_cd   = 1'b1;
-                e_cd   = 2'b01;
-                alu_cd = 3'b000;
-                m_cd1  = 1'b1;
-                m_cd2  = 1'b1;
-                d_cd1  = 1'b0;
-                d_cd2  = 1'b0;
-                dm_cd  = 1'b0;
+                alu_cd = ALU_ADD;
+                e_cd   = IMM_I;
+                ctrl_bits = CTRL_LOAD;
             end
             default: begin
-                r_cd   = 1'b0;
-                e_cd   = 2'b00;
-                alu_cd = 3'b111;
-                m_cd1  = 1'b1;
-                m_cd2  = 1'b0;
-                d_cd1  = 1'b0;
-                d_cd2  = 1'b1;
-                dm_cd  = 1'b0;
+                alu_cd = ALU_NONE;
+                e_cd   = IMM_NONE;
+                ctrl_bits = CTRL_NONE;
             end
         endcase
     end
