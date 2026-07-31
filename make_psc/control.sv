@@ -4,15 +4,15 @@ module control (
     input  logic [6:0] op,
     input  logic [2:0] funct3, 
     input logic [6:0] funct7,
-    output logic [1:0] pc_cd, m_cd2, 
-    output logic r_cd, dm_cd, m_cd1, d_cd1, d_cd2,
+    output logic [1:0] pc_cd, m_cd2, d_cd2, 
+    output logic r_cd, dm_cd, m_cd1, d_cd1,
     output  logic [2:0] e_cd,
     output  logic [3:0] alu_cd 
 );
 logic [16:0] casecode;
 assign casecode = {op, funct3, funct7};
 ctrl_e ctrl_bits;
-assign {r_cd, m_cd1, m_cd2, d_cd1, d_cd2, dm_cd} = ctrl_bits;
+assign {pc_cd, r_cd, m_cd1, m_cd2, d_cd1, d_cd2, dm_cd} = ctrl_bits;
 
     localparam logic [16:0]
         P_   = 17'b0111111???????????,          //fake
@@ -204,10 +204,10 @@ assign {r_cd, m_cd1, m_cd2, d_cd1, d_cd2, dm_cd} = ctrl_bits;
                 e_cd      = IMM_J;
                 ctrl_bits = CTRL_JUMP_LINK;
             end
-            P_: begin
-                alu_cd    = ALU_NONE;
-                e_cd      = IMM_NONE;
-                ctrl_bits = CTRL_NONE;
+            P_JALR: begin
+                alu_cd    = ALU_ADD;
+                e_cd      = IMM_I;
+                ctrl_bits = CTRL_JALR;
             end
 
             // Default

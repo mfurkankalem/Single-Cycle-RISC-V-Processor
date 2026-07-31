@@ -64,6 +64,14 @@ def assemble_jal(args):
     opcode = "1101111"
     return f"{b[0]}{b[10:20]}{b[9]}{b[1:9]}{format(rd, '05b')}{opcode}"
 
+def assemble_jalr(args):
+    rd = int(args[0].replace('x', ''))
+    imm, rs1 = parse_mem_arg(args[1])
+    if imm < 0: imm = (1 << 12) + imm
+    opcode = "1100111"
+    funct3 = "000"
+    return f"{format(imm, '012b')}{format(rs1, '05b')}{funct3}{format(rd, '05b')}{opcode}"
+
 def main():
     with open(os.path.join(SCRIPT_DIR, "codes.txt")) as cf:
         lines = [l.strip() for l in cf if l.strip()]
@@ -85,6 +93,7 @@ def main():
             elif ((cmd == "slt") or (cmd == "ka")): bin_code = assemble_rtype(args, "010", "0000000")
             elif ((cmd == "sltu") or (cmd == "kai")): bin_code = assemble_rtype(args, "011", "0000000")
             elif ((cmd == "jal") or (cmd == "atlavb")): bin_code = assemble_jal(args)
+            elif ((cmd == "jalr") or (cmd == "atlavs")): bin_code = assemble_jalr(args)
             else:
                 print(f"Bilinmeyen komut: {cmd}")
                 continue

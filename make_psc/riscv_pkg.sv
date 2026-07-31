@@ -25,18 +25,19 @@ package riscv_pkg;
         IMM_B    = 3'b101    // B-type operations
     } imm_src_e;
 
-    typedef enum logic [6:0] {
-        CTRL_REG_WRITE   = 7'b1_0_00_0_1_0,   // add, sub
-        CTRL_REG_WRITE_I = 7'b1_1_00_0_1_0,   // addi
-        CTRL_JUMP_LINK   = 7'b1_0_10_0_1_0,   // jal
-        CTRL_LOAD        = 7'b1_1_01_0_0_0,   // lw
-        CTRL_STORE       = 7'b0_1_00_1_0_1,   // sw
-        CTRL_NONE        = 7'b0_1_00_0_1_0
+    typedef enum logic [9:0] {
+        CTRL_REG_WRITE   = 10'b00_1_0_00_0_01_0,   // add, sub
+        CTRL_REG_WRITE_I = 10'b00_1_1_00_0_01_0,   // addi
+        CTRL_JUMP_LINK   = 10'b01_1_0_10_0_01_0,   // jal
+        CTRL_JALR        = 10'b10_1_1_10_0_10_0,   // jalr
+        CTRL_LOAD        = 10'b00_1_1_01_0_00_0,   // lw
+        CTRL_STORE       = 10'b00_0_1_00_1_00_1,   // sw
+        CTRL_NONE        = 10'b00_0_1_00_0_01_0
     } ctrl_e;
 
     typedef enum logic [1:0] {
-        PC_NONE  = 2'b00 ,   
-        PC_JAL   = 2'b01 ,   
+        PC_NONE  = 2'b00,   
+        PC_JAL   = 2'b01,   
         PC_JALR  = 2'b10 
     } pc_e;
 
