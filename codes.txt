@@ -1,3 +1,13 @@
-yüksekh x1 0x12345
-ekleh x1 x1 0x678
-yüksekpc x2 0x23
+ekleh x1, x0, 3
+ekleh x2, x0, 5
+ekle  x3, x1, x2
+çıkar x4, x2, x1
+eşitd x1, x2, 8
+ekleh x8, x0, 99
+kaydet x3, 0(x0)
+oku    x5, 0(x0)
+yüksekh x6, 0x12345
+yüksekpc x7, 0x2
+atla  8
+ekleh x9, x0, 111
+ekleh x10, x0, 1
