@@ -242,7 +242,7 @@ assign {pc_cd, r_cd, m_cd1, m_cd2, m_cd3, d_cd1, d_cd2, dm_cd} = ctrl_bits;
                 ctrl_bits = CTRL_REG_WRITE_I;
             end
             P_AUIPC: begin
-                alu_cd    = ALU_AUIPC;
+                alu_cd    = ALU_ADD;
                 e_cd      = IMM_U;
                 ctrl_bits = CTRL_AUIPC;
             end

@@ -18,7 +18,6 @@ module ALU (
             ALU_SRA:   alu_rd = $signed(alu_a) >>> alu_b[4:0];
             ALU_SLT:   alu_rd = ($signed(alu_a) < $signed(alu_b)) ? 32'd1 : 32'd0;
             ALU_SLTU:  alu_rd = (alu_a < alu_b) ? 32'd1 : 32'd0;
-            ALU_AUIPC: alu_rd = alu_a + ($signed(alu_b) << 12);
             default:   alu_rd = 'x;
         endcase
     end

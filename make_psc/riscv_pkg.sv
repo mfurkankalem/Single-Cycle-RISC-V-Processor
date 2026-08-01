@@ -13,7 +13,6 @@ package riscv_pkg;
         ALU_SRA   = 4'b0111,
         ALU_SLT   = 4'b1000,
         ALU_SLTU  = 4'b1001,
-        ALU_AUIPC = 4'b1010,
         ALU_NONE  = 4'b1111
     } alu_op_e;
 

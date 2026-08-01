@@ -53,9 +53,9 @@ The assembler accepts both the standard RISC-V names and their Turkish equivalen
 | büyük | bge | B-Type | `büyük x0, x2, offset` | `if (rs1 >= rs2) pc += offset` |
 | küçüki | bltu | B-Type | `küçüki x0, x2, offset` | `if (rs1 < rs2 unsigned) pc += offset` |
 | büyüki | bgeu | B-Type | `büyüki x0, x2, offset` | `if (rs1 >= rs2 unsigned) pc += offset` |
-| atlas | jalr | I-Type / Pseudo | `atlas x1, 0(x0)` | `rd = pc + 4; pc = rs` |
 | atla | j | Pseudo (J-Type) | `atla offset` | `x0 = pc + 4; pc = pc + offset` |
 | atlab | jal | J-Type / Pseudo | `atlab x1, offset` | `rd = pc + 4; pc = pc + offset` |
+| atlas | jalr | I-Type / Pseudo | `atlas x1, 0(x0)` | `rd = pc + 4; pc = rs` |
 | yüksekh | lui | U-Type | `yüksekh x1, imm` | `rd = imm << 12` |
 | yüksekpc | auipc | U-Type | `yüksekpc x1, imm` | `rd = pc + (imm << 12)` |
 
