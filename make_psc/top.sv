@@ -81,11 +81,11 @@ logic [2:0] e_cd;
 logic [3:0] alu_cd;
 
 logic [31:0] dm_a, dm_rd, dm_wd;
-logic [31:0] im_rd;
+logic [31:0] im_rd, branch_rd;
 logic [31:0] jalr_counter, empty;                 //fake?
 
 prog_cnt pc_0(.clk(clk), .pc_cd(pc_cd), .e_rd(e_rd), .jalr_counter(jalr_counter),
-.program_counter(program_counter));
+.branch_rd(branch_rd), .program_counter(program_counter));
 
 register r_0(.clk(clk), .r_cd(r_cd), .r_a1(r_a1), .r_a2(r_a2), .r_a3(r_a3),
  .r_wd3(r_wd3), .r_rd1(r_rd1), .r_rd2(r_rd2));
@@ -93,6 +93,9 @@ register r_0(.clk(clk), .r_cd(r_cd), .r_a1(r_a1), .r_a2(r_a2), .r_a3(r_a3),
 extender e_0(.e_a(e_a), .e_cd(e_cd), .e_rd(e_rd));
 
 ALU alu_0(.alu_a(alu_a), .alu_b(alu_b), .alu_cd(alu_cd), .alu_rd(alu_rd));
+
+branch branch_0(.alu_rd(alu_rd), .e_rd(e_rd), .program_counter(program_counter),
+.op(im_rd[6:0]), .funct3(im_rd[14:12]), .branch_rd(branch_rd));
 
 data_memory m_data(.clk(clk), .dm_cd(dm_cd), .dm_a(dm_a), .dm_wd (dm_wd),
   .dm_rd(dm_rd));

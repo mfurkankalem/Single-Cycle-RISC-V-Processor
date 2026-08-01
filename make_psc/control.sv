@@ -192,6 +192,36 @@ assign {pc_cd, r_cd, m_cd1, m_cd2, d_cd1, d_cd2, dm_cd} = ctrl_bits;
                                             //cache
             
             // Branch
+            P_BEQ: begin
+                alu_cd    = ALU_SUB;
+                e_cd      = IMM_B;
+                ctrl_bits = CTRL_BRANCH;
+            end
+            P_BNE: begin
+                alu_cd    = ALU_SUB;
+                e_cd      = IMM_B;
+                ctrl_bits = CTRL_BRANCH;
+            end
+            P_BLT: begin
+                alu_cd    = ALU_SLT;
+                e_cd      = IMM_B;
+                ctrl_bits = CTRL_BRANCH;
+            end
+            P_BGE: begin
+                alu_cd    = ALU_SLT;
+                e_cd      = IMM_B;
+                ctrl_bits = CTRL_BRANCH;
+            end
+            P_BLTU: begin
+                alu_cd    = ALU_SLTU;
+                e_cd      = IMM_B;
+                ctrl_bits = CTRL_BRANCH;
+            end
+            P_BGEU: begin
+                alu_cd    = ALU_SLTU;
+                e_cd      = IMM_B;
+                ctrl_bits = CTRL_BRANCH;
+            end
             P_: begin
                 alu_cd    = ALU_NONE;
                 e_cd      = IMM_NONE;

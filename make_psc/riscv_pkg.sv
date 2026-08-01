@@ -30,15 +30,17 @@ package riscv_pkg;
         CTRL_REG_WRITE_I = 10'b00_1_1_00_0_01_0,   // addi
         CTRL_JUMP_LINK   = 10'b01_1_0_10_0_01_0,   // jal
         CTRL_JALR        = 10'b10_1_1_10_0_10_0,   // jalr
+        CTRL_BRANCH      = 10'b11_0_0_00_0_11_0,   // branch 
         CTRL_LOAD        = 10'b00_1_1_01_0_00_0,   // lw
         CTRL_STORE       = 10'b00_0_1_00_1_00_1,   // sw
         CTRL_NONE        = 10'b00_0_1_00_0_01_0
     } ctrl_e;
 
     typedef enum logic [1:0] {
-        PC_NONE  = 2'b00,   
-        PC_JAL   = 2'b01,   
-        PC_JALR  = 2'b10 
+        PC_NONE   = 2'b00,   
+        PC_JAL    = 2'b01,   
+        PC_JALR   = 2'b10,
+        PC_BRANCH = 2'b11 
     } pc_e;
 
 endpackage

@@ -72,6 +72,18 @@ def assemble_jalr(args):
     funct3 = "000"
     return f"{format(imm, '012b')}{format(rs1, '05b')}{funct3}{format(rd, '05b')}{opcode}"
 
+def assemble_branch(args, funct3):
+    rs1 = int(args[0].replace('x', ''))
+    rs2 = int(args[1].replace('x', ''))
+    imm = int(args[2])
+    if imm % 2 != 0:
+        raise ValueError(f"branch offset must be even: {imm}")
+    if imm < 0: imm = (1 << 13) + imm
+    # b[0] holds imm[12], b[12] holds imm[0]
+    b = format(imm, '013b')
+    opcode = "1100011"
+    return f"{b[0]}{b[2:8]}{format(rs2, '05b')}{format(rs1, '05b')}{funct3}{b[8:12]}{b[1]}{opcode}"
+
 def main():
     with open(os.path.join(SCRIPT_DIR, "codes.txt")) as cf:
         lines = [l.strip() for l in cf if l.strip()]
@@ -87,13 +99,19 @@ def main():
             elif ((cmd == "sub") or (cmd == "çıkar")): bin_code = assemble_rtype(args, "000", "0100000")
             elif ((cmd == "sw") or (cmd == "kaydet")): bin_code = assemble_sw(args)
             elif ((cmd == "lw") or (cmd == "oku")): bin_code = assemble_lw(args)
-            elif ((cmd == "sll") or (cmd == "ksm")): bin_code = assemble_rtype(args, "001", "0000000")
-            elif ((cmd == "srl") or (cmd == "kgm")): bin_code = assemble_rtype(args, "101", "0000000")
-            elif ((cmd == "sra") or (cmd == "kga")): bin_code = assemble_rtype(args, "101", "0100000")
-            elif ((cmd == "slt") or (cmd == "ka")): bin_code = assemble_rtype(args, "010", "0000000")
-            elif ((cmd == "sltu") or (cmd == "kai")): bin_code = assemble_rtype(args, "011", "0000000")
-            elif ((cmd == "jal") or (cmd == "atlavb")): bin_code = assemble_jal(args)
-            elif ((cmd == "jalr") or (cmd == "atlavs")): bin_code = assemble_jalr(args)
+            elif ((cmd == "sll") or (cmd == "sol")): bin_code = assemble_rtype(args, "001", "0000000")
+            elif ((cmd == "srl") or (cmd == "sağ")): bin_code = assemble_rtype(args, "101", "0000000")
+            elif ((cmd == "sra") or (cmd == "sağa")): bin_code = assemble_rtype(args, "101", "0100000")
+            elif ((cmd == "slt") or (cmd == "küçükse")): bin_code = assemble_rtype(args, "010", "0000000")
+            elif ((cmd == "sltu") or (cmd == "küçüksei")): bin_code = assemble_rtype(args, "011", "0000000")
+            elif ((cmd == "jal") or (cmd == "atla")): bin_code = assemble_jal(args)
+            elif ((cmd == "jalr") or (cmd == "atlas")): bin_code = assemble_jalr(args)
+            elif ((cmd == "beq") or (cmd == "eşit")): bin_code = assemble_branch(args, "000")
+            elif ((cmd == "bne") or (cmd == "eşitd")): bin_code = assemble_branch(args, "001")
+            elif ((cmd == "blt") or (cmd == "küçük")): bin_code = assemble_branch(args, "100")
+            elif ((cmd == "bge") or (cmd == "büyük")): bin_code = assemble_branch(args, "101")
+            elif ((cmd == "bltu") or (cmd == "küçüki")): bin_code = assemble_branch(args, "110")
+            elif ((cmd == "bgeu") or (cmd == "büyüki")): bin_code = assemble_branch(args, "111")
             else:
                 print(f"Bilinmeyen komut: {cmd}")
                 continue
