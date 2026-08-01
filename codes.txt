@@ -1,8 +1,3 @@
-ekleh x1 x0 5       
-ekleh x2 x0 5       
-eşit x1 x2 4          
-ekleh x3 x0 111
-ekleh x2 x2 1        
-küçük x1 x2 4      
-ekleh x4 x0 222
-ekleh x3 x0 1
+yüksekh x1 0x12345
+ekleh x1 x1 0x678
+yüksekpc x2 0x23

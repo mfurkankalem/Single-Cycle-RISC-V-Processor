@@ -12,7 +12,7 @@ def parse_mem_arg(arg):
 def assemble_addi(args):
     rd = int(args[0].replace('x', ''))
     rs1 = int(args[1].replace('x', ''))
-    imm = int(args[2])
+    imm = int(args[2], 0)
     if imm < 0: imm = (1 << 12) + imm
     opcode = "0010011"
     funct3 = "000"
@@ -84,6 +84,12 @@ def assemble_branch(args, funct3):
     opcode = "1100011"
     return f"{b[0]}{b[2:8]}{format(rs2, '05b')}{format(rs1, '05b')}{funct3}{b[8:12]}{b[1]}{opcode}"
 
+def assemble_utype(args, opcode):
+    rd = int(args[0].replace('x', ''))
+    imm = int(args[1], 0)
+    if imm < 0: imm = (1 << 20) + imm
+    return f"{format(imm, '020b')}{format(rd, '05b')}{opcode}"
+
 def main():
     with open(os.path.join(SCRIPT_DIR, "codes.txt")) as cf:
         lines = [l.strip() for l in cf if l.strip()]
@@ -112,6 +118,8 @@ def main():
             elif ((cmd == "bge") or (cmd == "büyük")): bin_code = assemble_branch(args, "101")
             elif ((cmd == "bltu") or (cmd == "küçüki")): bin_code = assemble_branch(args, "110")
             elif ((cmd == "bgeu") or (cmd == "büyüki")): bin_code = assemble_branch(args, "111")
+            elif ((cmd == "lui") or (cmd == "yüksekh")): bin_code = assemble_utype(args, "0110111")
+            elif ((cmd == "auipc") or (cmd == "yüksekpc")): bin_code = assemble_utype(args, "0010111")
             else:
                 print(f"Bilinmeyen komut: {cmd}")
                 continue

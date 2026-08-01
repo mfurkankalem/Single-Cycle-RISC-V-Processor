@@ -76,7 +76,7 @@ logic [31:0] e_rd;
 logic [31:0] alu_a, alu_b, alu_rd;
 
 logic [1:0] pc_cd, m_cd2, d_cd2;
-logic r_cd, dm_cd, m_cd1, d_cd1;
+logic r_cd, dm_cd, m_cd1, m_cd3, d_cd1;
 logic [2:0] e_cd;
 logic [3:0] alu_cd;
 
@@ -101,8 +101,8 @@ data_memory m_data(.clk(clk), .dm_cd(dm_cd), .dm_a(dm_a), .dm_wd (dm_wd),
   .dm_rd(dm_rd));
 
 control c_0(.op(im_rd[6:0]), .funct3(im_rd[14:12]), .funct7(im_rd[31:25]),
-.pc_cd(pc_cd), .r_cd(r_cd), .dm_cd(dm_cd), .m_cd1(m_cd1), .m_cd2(m_cd2), .d_cd1(d_cd1),
-.d_cd2(d_cd2), .e_cd(e_cd), .alu_cd(alu_cd));
+.pc_cd(pc_cd), .r_cd(r_cd), .dm_cd(dm_cd), .m_cd1(m_cd1), .m_cd2(m_cd2), 
+.m_cd3(m_cd3), .d_cd1(d_cd1), .d_cd2(d_cd2), .e_cd(e_cd), .alu_cd(alu_cd));
 
 instruction_memory m_inst(.im_a(program_counter), .im_rd(im_rd));   
 
@@ -111,11 +111,11 @@ assign e_a = im_rd[31:7];
 assign r_a1 = im_rd[19:15];
 assign r_a2 = im_rd[24:20];
 assign r_a3 = im_rd[11:7];
-assign alu_a = r_rd1;
 
 mux mux_1 (.a1(demux1_out1), .a2(e_rd), .m_cd(m_cd1), .m_rd(alu_b));
 mux_2b mux_2 (.a1(demux2_out2), .a2(dm_rd), .a3(program_counter), 
 .a4('0), .m_cd(m_cd2), .m_rd(r_wd3));
+mux mux_3 (.a1(program_counter), .a2(r_rd1), .m_cd(m_cd3), .m_rd(alu_a));
 
 logic [31:0] demux1_out1, demux2_out2;
 demux demux_1 (.a1(r_rd2), .d_cd(d_cd1), .rd1(demux1_out1), .rd2(dm_wd));
