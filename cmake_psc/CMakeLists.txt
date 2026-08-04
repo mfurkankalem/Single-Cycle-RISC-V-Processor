@@ -21,6 +21,7 @@
 
 cmake_minimum_required(VERSION 3.12)
 cmake_policy(SET CMP0074 NEW)
+cmake_policy(SET CMP0144 NEW)
 project(cmake_psc)
 
 find_package(verilator HINTS $ENV{VERILATOR_ROOT} ${VERILATOR_ROOT})
